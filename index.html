@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yonas B. Heyi | Portfolio</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --primary-teal: #008080;
+            --accent-blue: #008fa1;
+            --gray-bg: #f8f9fa;
+            --text-color: #222;
+            --bg-color: #f8f9fa;
+            --card-bg: #fff;
+            --shadow-color: rgba(0,128,128,0.08);
+        }
+        body.dark-mode {
+            --primary-teal: #00b3b3;
+            --accent-blue: #00c4c4;
+            --gray-bg: #121212;
+            --text-color: #ddd;
+            --bg-color: #1e1e1e;
+            --card-bg: #2c2c2c;
+            --shadow-color: rgba(0,0,0,0.5);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+        .navbar {
+            background: var(--card-bg);
+            box-shadow: 0 2px 8px var(--shadow-color);
+            transition: background 0.3s ease;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-teal) !important;
+            letter-spacing: 1px;
+            font-size: 1.45rem;
+        }
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-color) !important;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link.active, .nav-link:hover {
+            color: var(--primary-teal) !important;
+        }
+        .nav-link:hover::after {
+            content: '';
+            display: block;
+            margin: 0 auto;
+            height: 2px;
+            width: 60%;
+            background: var(--primary-teal);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        .hero-section {
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(110deg, var(--primary-teal) 0%, var(--accent-blue) 100%);
+            color: #fff;
+            padding-top: 72px;
+            transition: background 0.3s ease;
+        }
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: slideIn 1s ease forwards;
+        }
+        .hero-content h2 {
+            font-size: 2rem;
+            color: #e0f7fa;
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: slideIn 1.5s ease forwards;
+        }
+        @keyframes slideIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-img {
+            border-radius: 2rem;
+            box-shadow: 0 4px 36px rgba(0,128,128,0.16);
+            transition: transform 0.4s ease;
+            max-width: 320px;
+            height: auto;
+        }
+        .img-hover-zoom:hover {
+            transform: scale(1.05);
+        }
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--primary-teal);
+            font-weight: 700;
+            margin-bottom: 32px;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+        .about-section, .skills-section, .activities-section, .certificates-section, .book-section, .web-projects-section, .teachers-section, .reviews-section, .contact-section, .my-journey-section, .gallery-section, .books-read-section {
+            padding: 72px 0 54px 0;
+            transition: background 0.3s ease;
+        }
+        .about-achievements {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+        .small-achieve-img {
+            border-radius: .4rem;
+            box-shadow: 0 1px 6px var(--shadow-color);
+            background: var(--card-bg);
+            width: 84px; height: 60px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .small-achieve-img:hover {
+            transform: scale(1.05);
+        }
+        .timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: var(--primary-teal);
+            border-radius: 3px;
+            transform: translateX(-50%);
+            transition: background 0.3s ease;
+        }
+        .timeline-event {
+            margin-bottom: 3rem;
+            width: 50%;
+            padding: 1.5rem 2rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            position: relative;
+            transition: transform 0.4s ease, background 0.3s ease;
+        }
+        .timeline-event:hover {
+            transform: translateY(-8px);
+        }
+        .timeline-event.left { left: 0; }
+        .timeline-event.right { left: 50%; margin-left: 2rem; }
+        .timeline-event::before {
+            content: '';
+            position: absolute;
+            top: 32px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary-teal);
+            border: 6px solid var(--card-bg);
+            box-shadow: 0 0 0 4px var(--primary-teal);
+            z-index: 2;
+            transition: background 0.3s ease;
+        }
+        .timeline-event.left::before { right: -56px; }
+        .timeline-event.right::before { left: -56px; }
+        .timeline-year {
+            position: absolute;
+            top: 24px;
+            width: 70px;
+            height: 70px;
+            background: var(--primary-teal);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px rgba(0,128,128,0.3);
+            transition: background 0.3s ease;
+        }
+        .timeline-event.left .timeline-year { right: -100px; }
+        .timeline-event.right .timeline-year { left: -100px; }
+        .timeline-icon {
+            font-size: 2.2rem;
+            color: var(--primary-teal);
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+        .skills-progress .progress {
+            height: 22px; border-radius: 12px; background: #e2eceb;
+            transition: background 0.3s ease;
+        }
+        .progress-bar {
+            background: var(--primary-teal);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: width 1s ease;
+        }
+        .body.dark-mode .progress {
+            background: #333;
+        }
+        .cert-card, .web-project-img, .teacher-img, .review-card, .book-card, .fact-card {
+            border-radius: .8rem;
+            box-shadow: 0 1px 10px var(--shadow-color);
+            background: var(--card-bg);
+            transition: transform 0.4s ease, background 0.3s ease;
+        }
+        .cert-card:hover, .web-project-img:hover, .teacher-img:hover, .review-card:hover, .book-card:hover, .fact-card:hover {
+            transform: scale(1.05);
+        }
+        .modal-content {
+            border-radius: 1rem;
+            background: var(--card-bg);
+            color: var(--text-color);
+            transition: background 0.3s ease;
+        }
+        .footer {
+            padding: 2.5em 0 1em 0;
+            text-align: center;
+            background: #f2f8fa;
+            color: #658;
+            margin-top: 48px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .body.dark-mode .footer {
+            background: #1e1e1e;
+            color: #aaa;
+        }
+        .dark-toggle {
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        .reviews-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.5rem;
+            scroll-behavior: smooth;
+            padding-bottom: 1rem;
+        }
+        .reviews-carousel::-webkit-scrollbar {
+            height: 8px;
+        }
+        .reviews-carousel::-webkit-scrollbar-thumb {
+            background: var(--primary-teal);
+            border-radius: 4px;
+        }
+        .book-card {
+            padding: 1rem;
+            text-align: center;
+        }
+        .book-img {
+            max-height: 200px;
+            object-fit: contain;
+        }
+        .book-desc {
+            margin-top: 1rem;
+            color: var(--text-color);
+        }
+        @media (max-width: 991px) {
+            .hero-section { flex-direction: column; text-align: center; }
+            .timeline::after { left: 2%; }
+            .timeline-event, .timeline-event.left, .timeline-event.right { left: 0 !important; width: 100%; }
+        }
+        @media (max-width: 540px) {
+            .hero-content h1 { font-size: 2.6rem; }
+            .hero-img { width: 74vw !important; }
+        }
+    </style>
+</head>
+<body>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#home">Yonas B. Heyi</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about-me">About Me</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            More
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#gallery">Gallery</a></li>
+            <li><a class="dropdown-item" href="#my-journey">My Journey</a></li>
+            <li><a class="dropdown-item" href="#skills">Skills</a></li>
+            <li><a class="dropdown-item" href="#major-activities">Major Activities</a></li>
+            <li><a class="dropdown-item" href="#certificates">Certificates</a></li>
+            <li><a class="dropdown-item" href="#book">Book</a></li>
+            <li><a class="dropdown-item" href="#books-read">Books I Read</a></li>
+            <li><a class="dropdown-item" href="#web-projects">Web Projects</a></li>
+            <li><a class="dropdown-item" href="#teachers">Teachers</a></li>
+            <li><a class="dropdown-item" href="#reviews">Reviews</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item">
+          <i class="bi bi-moon-stars-fill dark-toggle nav-link" onclick="toggleDarkMode()"></i>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section id="home" class="hero-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 hero-content">
+        <div style="font-size:1.3rem;">I'm</div>
+        <h1>Yonas B. Heyi</h1>
+        <h2>curious, creative, collaborative and courageous.</h2>
+        <a href="#contact" class="btn btn-lg mt-4" style="background:var(--primary-teal);color:#fff;box-shadow:0 1px 12px rgba(0,128,128,0.11);">Contact Me</a>
+      </div>
+      <div class="col-lg-6 text-center">
+        <img src="/assets/my-photo.jpg" alt="My photo" class="hero-img img-fluid img-hover-zoom" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT ME -->
+<section id="about-me" class="about-section">
+  <div class="container">
+    <div class="row align-items-start g-5">
+      <div class="col-lg-6 d-flex flex-column align-items-center">
+        <img src="assets/laptop.jpg" alt="Thinking at laptop" class="img-fluid mb-3 img-hover-zoom" width="400" height="320" />
+        <div class="about-achievements">
+          <img src="https://placehold.co/120x80?text=AddisCoder+Cert" alt="AddisCoder Certificate" class="small-achieve-img" width="84" height="60"/>
+          <img src="https://placehold.co/120x80?text=Moot+Court+Cert" alt="Moot Court Certificate" class="small-achieve-img" width="84" height="60"/>
+          <img src="https://placehold.co/120x80?text=STEM+Power+Cert" alt="STEM Power Certificate" class="small-achieve-img" width="84" height="60"/>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="section-title text-lg-start text-center">
+          About Me
+        </div>
+        <p>Welcome to my website! I'm Yonas Birhanu, a Grade 12 student at ODA Boarding School. I'm a multi-talented individual with skills in web development, video editing, app development, digital illustration, Photoshop, product design, and 3D modeling. Key achievements include certificates from AddisCoder, Moot Court, and STEM Power, plus writing a book in Afan Oromo.</p>
+        <button class="btn btn-outline-primary mt-3" data-bs-toggle="modal" data-bs-target="#aboutModal">Learn More</button>
+        <div class="row g-4 mt-4">
+          <div class="col-md-6">
+            <div class="fact-card">
+              <i class="bi bi-award fact-icon"></i>
+              <div class="fact-number">15+</div>
+              <p>Achievements</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="fact-card">
+              <i class="bi bi-book-half fact-icon"></i>
+              <div class="fact-number">1</div>
+              <p>Published Book</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL FOR FULL ABOUT TEXT -->
+<div class="modal fade" id="aboutModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0" style="padding-bottom:0">
+        <h2 class="modal-title">About Me</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Hello, and welcome to my website! My name is Yonas Birhanu and i have graduated grade 12 from ODA Boarding School. I am an Ethiopian with diverse interests, always eager to learn and try new things. Over the years, I have developed a strong passion for technology, creativity, and leadership, shaping my journey to where I am today. I enjoy web development, app creation, video editing, digital illustration, as well as 3D modeling and product design. I have received certificates from AddisCoder (one of Africa’s most rigorous CS camps), Moot Court, and STEM Power—for which I am very grateful. I am also deeply proud of writing a book in Afan Oromo, my native language. It is to inspire Ethiopian youth in their mother tongue. I believe in lifelong learning, giving back to my community, and making an impact through technology and innovation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section id="gallery" class="gallery-section">
+  <div class="container">
+    <div class="section-title">Gallery</div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="gallery-item">
+          <img src="https://placehold.co/400x300?text=Award+from+Jelani+Nelson" alt="Receiving award from Jelani Nelson" class="img-fluid" />
+          <div class="gallery-caption">Receiving award from Jelani Nelson</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="gallery-item">
+          <img src="https://placehold.co/400x300?text=Giving+Tutor" alt="Giving tutor session" class="img-fluid" />
+          <div class="gallery-caption">Giving tutor session</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="gallery-item">
+          <img src="https://placehold.co/400x300?text=Another+Achievement" alt="Another achievement moment" class="img-fluid" />
+          <div class="gallery-caption">Another achievement moment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MY JOURNEY -->
+<section id="my-journey" class="my-journey-section py-5">
+  <div class="container">
+    <div class="section-title mb-5">Achievements / My Journey</div>
+    <div class="timeline">
+      <div class="timeline-event right">
+        <div class="timeline-year">2020</div>
+        <i class="bi bi-tools timeline-icon"></i>
+        <h5>Hardware Maintenance From Family Members</h5>
+      </div>
+      <div class="timeline-event left">
+        <div class="timeline-year">2021</div>
+        <i class="bi bi-code-slash timeline-icon"></i>
+        <h5>Web Development From Online Courses And Youtube Videos</h5>
+      </div>
+      <div class="timeline-event right">
+        <div class="timeline-year">2021</div>
+        <i class="bi bi-robot timeline-icon"></i>
+        <h5>Robotics STEM Foka Center</h5>
+      </div>
+      <div class="timeline-event left">
+        <div class="timeline-year">2022</div>
+        <i class="bi bi-palette timeline-icon"></i>
+        <h5>Graphics Design From Online Courses And Youtube Videos</h5>
+      </div>
+      <div class="timeline-event right">
+        <div class="timeline-year">2022</div>
+        <i class="bi bi-cube timeline-icon"></i>
+        <h5>3D Modeling From Online Courses And Youtube Videos</h5>
+      </div>
+      <div class="timeline-event left">
+        <div class="timeline-year">2023</div>
+        <i class="bi bi-phone timeline-icon"></i>
+        <h5>App Development From Online Courses And Youtube Videos</h5>
+      </div>
+      <div class="timeline-event right">
+        <div class="timeline-year">2023</div>
+        <i class="bi bi-box-seam timeline-icon"></i>
+        <h5>Product Design From Online Courses And Youtube Videos</h5>
+      </div>
+    </div>
+    <div class="text-center mt-3">This timeline showcases my milestones in school, competitions, and projects.</div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section gray-bg">
+  <div class="container">
+    <div class="section-title">Skills</div>
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-7 skills-progress">
+        <div class="mb-3 skill-item" data-percent="95">
+          HTML <div class="progress"><div class="progress-bar" style="width:0%; background: var(--primary-teal);">0%</div></div>
+        </div>
+        <div class="mb-3 skill-item" data-percent="90">
+          CSS <div class="progress"><div class="progress-bar" style="width:0%; background: var(--primary-teal);">0%</div></div>
+        </div>
+        <div class="mb-3 skill-item" data-percent="75">
+          JavaScript <div class="progress"><div class="progress-bar" style="width:0%; background: var(--primary-teal);">0%</div></div>
+        </div>
+        <div class="mb-3 skill-item" data-percent="85">
+          Bootstrap & JQuery <div class="progress"><div class="progress-bar" style="width:0%; background: var(--primary-teal);">0%</div></div>
+        </div>
+        <div class="mb-3 skill-item" data-percent="85">
+          Adobe Photoshop <div class="progress"><div class="progress-bar" style="width:0%; background: var(--primary-teal);">0%</div></div>
+        </div>
+        <div class="mb-3 skill-item" data-percent="90">
+          Adobe Illustrator <div class="progress"><div class="progress-bar" style="width:0%; background: var(--primary-teal);">0%</div></div>
+        </div>
+        <div class="mb-3 skill-item" data-percent="80">
+          Adobe Premiere Pro <div class="progress"><div class="progress-bar" style="width:0%; background: var(--primary-teal);">0%</div></div>
+        </div>
+        <div class="mb-3 skill-item" data-percent="100">
+          Figma <div class="progress"><div class="progress-bar" style="width:0%; background: var(--primary-teal);">0%</div></div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="ps-lg-4 fs-5">My diverse skill set in development and design allows me to bridge technology and creativity, delivering robust solutions with aesthetic flair. Whether coding dynamic interfaces or crafting digital art, I thrive on learning and creating value.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAJOR ACTIVITIES -->
+<section id="major-activities" class="activities-section">
+  <div class="container">
+    <div class="section-title">Major Activities during High School</div>
+    <ul class="row list-unstyled g-4">
+      <li class="col-md-4"><div class="p-3 cert-card">
+        <b>Mini-Media Club</b>: coordinator</div></li>
+      <li class="col-md-4"><div class="p-3 cert-card"><b>ICT Club</b>: member</div></li>
+      <li class="col-md-4"><div class="p-3 cert-card"><b>Anti-Corruption Commission</b>: participant</div></li>
+      <li class="col-md-4"><div class="p-3 cert-card"><b>Moot Court</b>: leadership role</div></li>
+      <li class="col-md-4"><div class="p-3 cert-card"><b>STEM Power</b>: volunteer</div></li>
+      <li class="col-md-4"><div class="p-3 cert-card"><b>Robotics at Foka Center</b>: volunteer</div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certificates" class="certificates-section">
+  <div class="container">
+    <div class="section-title">Certificates</div>
+    <div class="row g-4">
+      <div class="col-md-3 col-sm-6">
+        <div class="cert-card">
+          <img src="https://placehold.co/300x200?text=Cert+1" alt="Certificate 1" class="cert-img img-fluid">
+          <h5>Certificate Title 1</h5>
+          <p>Short description of the certificate achievement.</p>
+          <button class="btn btn-sm btn-outline-primary zoom-modal-btn" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://placehold.co/600x400?text=Cert+1+Full">Zoom</button>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="cert-card">
+          <img src="https://placehold.co/300x200?text=Cert+2" alt="Certificate 2" class="cert-img img-fluid">
+          <h5>Certificate Title 2</h5>
+          <p>Short description of the certificate achievement.</p>
+          <button class="btn btn-sm btn-outline-primary zoom-modal-btn" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://placehold.co/600x400?text=Cert+2+Full">Zoom</button>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="cert-card">
+          <img src="https://placehold.co/300x200?text=Cert+3" alt="Certificate 3" class="cert-img img-fluid">
+          <h5>Certificate Title 3</h5>
+          <p>Short description of the certificate achievement.</p>
+          <button class="btn btn-sm btn-outline-primary zoom-modal-btn" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://placehold.co/600x400?text=Cert+3+Full">Zoom</button>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="cert-card">
+          <img src="https://placehold.co/300x200?text=Cert+4" alt="Certificate 4" class="cert-img img-fluid">
+          <h5>Certificate Title 4</h5>
+          <p>Short description of the certificate achievement.</p>
+          <button class="btn btn-sm btn-outline-primary zoom-modal-btn" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://placehold.co/600x400?text=Cert+4+Full">Zoom</button>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="cert-card">
+          <img src="https://placehold.co/300x200?text=Cert+5" alt="Certificate 5" class="cert-img img-fluid">
+          <h5>Certificate Title 5</h5>
+          <p>Short description of the certificate achievement.</p>
+          <button class="btn btn-sm btn-outline-primary zoom-modal-btn" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://placehold.co/600x400?text=Cert+5+Full">Zoom</button>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="cert-card">
+          <img src="https://placehold.co/300x200?text=Cert+6" alt="Certificate 6" class="cert-img img-fluid">
+          <h5>Certificate Title 6</h5>
+          <p>Short description of the certificate achievement.</p>
+          <button class="btn btn-sm btn-outline-primary zoom-modal-btn" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://placehold.co/600x400?text=Cert+6+Full">Zoom</button>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="cert-card">
+          <img src="https://placehold.co/300x200?text=Cert+7" alt="Certificate 7" class="cert-img img-fluid">
+          <h5>Certificate Title 7</h5>
+          <p>Short description of the certificate achievement.</p>
+          <button class="btn btn-sm btn-outline-primary zoom-modal-btn" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://placehold.co/600x400?text=Cert+7+Full">Zoom</button>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="cert-card">
+          <img src="https://placehold.co/300x200?text=Cert+8" alt="Certificate 8" class="cert-img img-fluid">
+          <h5>Certificate Title 8</h5>
+          <p>Short description of the certificate achievement.</p>
+          <button class="btn btn-sm btn-outline-primary zoom-modal-btn" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://placehold.co/600x400?text=Cert+8+Full">Zoom</button>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="cert-card">
+          <img src="https://placehold.co/300x200?text=Cert+9" alt="Certificate 9" class="cert-img img-fluid">
+          <h5>Certificate Title 9</h5>
+          <p>Short description of the certificate achievement.</p>
+          <button class="btn btn-sm btn-outline-primary zoom-modal-btn" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://placehold.co/600x400?text=Cert+9+Full">Zoom</button>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="cert-card">
+          <img src="https://placehold.co/300x200?text=Cert+10" alt="Certificate 10" class="cert-img img-fluid">
+          <h5>Certificate Title 10</h5>
+          <p>Short description of the certificate achievement.</p>
+          <button class="btn btn-sm btn-outline-primary zoom-modal-btn" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://placehold.co/600x400?text=Cert+10+Full">Zoom</button>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="cert-card">
+          <img src="https://placehold.co/300x200?text=Cert+11" alt="Certificate 11" class="cert-img img-fluid">
+          <h5>Certificate Title 11</h5>
+          <p>Short description of the certificate achievement.</p>
+          <button class="btn btn-sm btn-outline-primary zoom-modal-btn" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://placehold.co/600x400?text=Cert+11+Full">Zoom</button>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="cert-card">
+          <img src="https://placehold.co/300x200?text=Cert+12" alt="Certificate 12" class="cert-img img-fluid">
+          <h5>Certificate Title 12</h5>
+          <p>Short description of the certificate achievement.</p>
+          <button class="btn btn-sm btn-outline-primary zoom-modal-btn" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://placehold.co/600x400?text=Cert+12+Full">Zoom</button>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="cert-card">
+          <img src="https://placehold.co/300x200?text=Cert+13" alt="Certificate 13" class="cert-img img-fluid">
+          <h5>Certificate Title 13</h5>
+          <p>Short description of the certificate achievement.</p>
+          <button class="btn btn-sm btn-outline-primary zoom-modal-btn" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="https://placehold.co/600x400?text=Cert+13+Full">Zoom</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATE ZOOM MODAL -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <img id="modalImg" src="#" alt="Certificate Zoom" class="img-fluid rounded w-100"/>
+    </div>
+  </div>
+</div>
+
+<!-- BOOK -->
+<section id="book" class="book-section bg-white">
+  <div class="container">
+    <div class="section-title">Book</div>
+    <div class="text-center mb-4">
+      Download my book written in Afan Oromo.
+    </div>
+    <div class="text-center"><a href="book.pdf" download class="btn btn-success">Download Book</a></div>
+  </div>
+</section>
+
+<!-- BOOKS I READ -->
+<section id="books-read" class="books-read-section">
+  <div class="container">
+    <div class="section-title">Books I Read</div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="book-card">
+          <img src="https://placehold.co/200x300?text=Book+1" alt="Book 1" class="book-img img-fluid">
+          <h5>Book Title 1</h5>
+          <p class="book-desc">Placeholder description for Book 1.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="book-card">
+          <img src="https://placehold.co/200x300?text=Book+2" alt="Book 2" class="book-img img-fluid">
+          <h5>Book Title 2</h5>
+          <p class="book-desc">Placeholder description for Book 2.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="book-card">
+          <img src="https://placehold.co/200x300?text=Book+3" alt="Book 3" class="book-img img-fluid">
+          <h5>Book Title 3</h5>
+          <p class="book-desc">Placeholder description for Book 3.</p>
+        </div>
+      </div>
+      <!-- Add more book cards as needed -->
+    </div>
+  </div>
+</section>
+
+<!-- WEB PROJECTS -->
+<section id="web-projects" class="web-projects-section gray-bg">
+  <div class="container">
+    <div class="section-title">Web Projects</div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="p-2"><img src="https://placehold.co/300x200?text=Web+Project+1" alt="Web Project 1" class="web-project-img img-fluid img-hover-zoom" /></div>
+        <a href="#" class="web-project-link">Live Link</a>
+      </div>
+      <div class="col-md-4">
+        <div class="p-2"><img src="https://placehold.co/300x200?text=Web+Project+2" alt="Web Project 2" class="web-project-img img-fluid img-hover-zoom" /></div>
+        <a href="#" class="web-project-link">Live Link</a>
+      </div>
+      <div class="col-md-4">
+        <div class="p-2"><img src="https://placehold.co/300x200?text=Web+Project+3" alt="Web Project 3" class="web-project-img img-fluid img-hover-zoom" /></div>
+        <a href="#" class="web-project-link">Live Link</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHERS -->
+<section id="teachers" class="teachers-section bg-white">
+  <div class="container">
+    <div class="section-title">Teachers</div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="p-2 text-center">
+            <img src="https://placehold.co/180x180?text=Teacher+1" alt="Teacher 1" class="teacher-img img-fluid mb-2 img-hover-zoom" />
+            <div class="fw-bold"> Girma Zewdie</div>
+            <div>Mathematics & mentor, known for his clarity and care.</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-2 text-center">
+            <img src="https://placehold.co/180x180?text=Teacher+2" alt="Teacher 2" class="teacher-img img-fluid mb-2 img-hover-zoom" />
+            <div class="fw-bold"> Rahel Mulugeta</div>
+            <div>Physics teacher, inspires interest in science.</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-2 text-center">
+            <img src="https://placehold.co/180x180?text=Teacher+3" alt="Teacher 3" class="teacher-img img-fluid mb-2 img-hover-zoom" />
+            <div class="fw-bold"> Daniel Teshome</div>
+            <div>ICT and programming, always encourages creativity.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="reviews-section">
+  <div class="container">
+    <div class="section-title">Reviews</div>
+    <div class="reviews-carousel">
+      <div class="review-card">
+        <i class="bi bi-quote review-icon"></i>
+        <p>"Yonas is a talented and dedicated student with a bright future."</p>
+        <div class="fw-bold">- Teacher 1</div>
+      </div>
+      <div class="review-card">
+        <i class="bi bi-quote review-icon"></i>
+        <p>"Impressive skills in development and design."</p>
+        <div class="fw-bold">- Peer 1</div>
+      </div>
+      <div class="review-card">
+        <i class="bi bi-quote review-icon"></i>
+        <p>"A true innovator and leader."</p>
+        <div class="fw-bold">- Mentor 1</div>
+      </div>
+      <!-- Add more -->
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="section-title">Contact</div>
+    <div class="row justify-content-center mb-4">
+      <div class="col-auto">
+        <a href="mailto:yonahbirhanu@gmail.com" class="btn btn-light border shadow-sm m-2" title="Email">
+          <i class="bi bi-envelope-check" style="color:var(--primary-teal);font-size:1.5em;"></i> yonahbirhanu@gmail.com
+        </a>
+      </div>
+      <div class="col-auto">
+        <a href="https://t.me/yonasheyi" class="btn btn-light border shadow-sm m-2" title="Telegram" target="_blank">
+          <i class="bi bi-telegram" style="color:var(--primary-teal);font-size:1.5em;"></i> @yonasheyi
+        </a>
+      </div>
+      <div class="col-auto">
+        <a href="https://www.linkedin.com/in/yourprofile" class="btn btn-light border shadow-sm m-2" title="LinkedIn" target="_blank">
+          <i class="bi bi-linkedin" style="color:var(--primary-teal);font-size:1.5em;"></i> /in/yourprofile
+        </a>
+      </div>
+      <div class="col-auto">
+        <a href="https://instagram.com/yonasheyi" class="btn btn-light border shadow-sm m-2" title="Instagram" target="_blank">
+          <i class="bi bi-instagram" style="color:var(--primary-teal);font-size:1.5em;"></i> @yonasheyi
+        </a>
+      </div>
+      <div class="col-auto">
+        <a href="https://wa.me/123456789" class="btn btn-light border shadow-sm m-2" title="WhatsApp" target="_blank">
+          <i class="bi bi-whatsapp" style="color:var(--primary-teal);font-size:1.5em;"></i> WhatsApp
+        </a>
+      </div>
+    </div>
+    <div class="footer mt-5">&copy; 2026 Yonas B. Heyi</div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const icon = document.querySelector('.dark-toggle');
+    icon.classList.toggle('bi-moon-stars-fill');
+    icon.classList.toggle('bi-sun-fill');
+  }
+  // Skills animation
+  const skillsSection = document.querySelector('#skills');
+  const skillObserver = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      document.querySelectorAll('.skill-item').forEach(item => {
+        const bar = item.querySelector('.progress-bar');
+        bar.style.width = item.dataset.percent + '%';
+        let count = 0;
+        const interval = setInterval(() => {
+          if (count < item.dataset.percent) {
+            count++;
+            bar.textContent = count + '%';
+          } else {
+            clearInterval(interval);
+          }
+        }, 20);
+      });
+      skillObserver.unobserve(skillsSection);
+    }
+  }, { threshold: 0.5 });
+  if (skillsSection) skillObserver.observe(skillsSection);
+  // Modal zoom
+  document.querySelectorAll('.zoom-modal-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('modalImg').src = btn.dataset.img;
+    });
+  });
+</script>
+</body>
+</html>
