@@ -1,0 +1,15 @@
+@import "tailwindcss"; /* Add only this */
+
+body {
+  @apply bg-midnight text-white font-sans;
+}
+
+
+@theme {
+  /* This tells Tailwind that 'midnight' is a valid color */
+  --color-midnight: #0C0C0C; 
+  
+  /* You can also add your other recommended colors here */
+  --color-cyan-accent: #00E8FF;
+  --color-violet-accent: #8A00FF;
+}
